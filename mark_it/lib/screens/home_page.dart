@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mark_it/screens/cart_screen.dart';
 import 'package:mark_it/screens/user_screen.dart';
+import 'package:mark_it/widgets/badge.dart';
 import '../widgets/offers_location.dart';
 import './home_screen.dart';
 import './categories_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/cart.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -52,8 +55,20 @@ class _HomePageState extends State<HomePage> {
             title: Text('Categories'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket),
-            title: Text('Cart'),
+            icon: Consumer<Cart>(
+              builder: (_, cartData, ch) => cartData.itemCount != 0
+                  ? Badge(
+                      child: ch,
+                      value: cartData.itemCount.toString(),
+                    )
+                  : ch,
+              child: Container(
+                child: Icon(
+                  Icons.shopping_cart,
+                ),
+              ),
+            ),
+            title: Text('Categories'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

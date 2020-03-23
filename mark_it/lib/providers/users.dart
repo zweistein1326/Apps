@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class Users {
+class User {
+  final String id;
   final String name;
   final String address;
   final String contact;
   final String email;
 
-  Users(
-      {@required this.name,
+  User(
+      {@required this.id,
+      @required this.name,
       @required this.address,
       @required this.contact,
       this.email});
 }
 
 class UserDetails with ChangeNotifier {
-  Map
+  List<User> _users = [];
+  List<User> getUser(String userId) {
+    return _users.where((user) => user.id == userId).toList();
+  }
 }

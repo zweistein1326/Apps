@@ -7,7 +7,7 @@ class OffersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EY'),
+        title: Text('Offers'),
       ),
       body:
           Center(child: Text('Helo'),),

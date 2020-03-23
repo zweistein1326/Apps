@@ -25,7 +25,7 @@ class OffersLocation extends StatelessWidget {
             onPressed: () {Navigator.of(context).pushNamed(OffersScreen.routeName);}, //...Navigate to Offers Page,
             label: Text(
               'Offers',
-              style: TextStyle(fontSize: 24, color: Colors.black),
+              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             icon: Icon(
               Icons.new_releases,

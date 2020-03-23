@@ -43,11 +43,11 @@ class Products with ChangeNotifier {
     // if (_showFavoritesOnly) {
     //   return _items.where((prodItem) => prodItem.isFavorite).toList();
     // }
-    return [..._items];
+    return [..._items].where((prodItem) => prodItem.hasSubString).toList();
   }
-  
-  List<Product> get favoriteItems{
-    return _items.where((prodItem)=>prodItem.isFavorite).toList();
+
+  List<Product> get favoriteItems {
+    return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
   // void showFavoritesOnly() {
   //   _showFavoritesOnly = true;
@@ -58,6 +58,14 @@ class Products with ChangeNotifier {
   //   _showFavoritesOnly = false;
   //   notifyListeners();
   // }
+
+  void checkSubString(String subString) {
+    _items.forEach((prodItem) {
+      prodItem.containsSubstring(subString);
+      print(prodItem.hasSubString);
+    });
+    notifyListeners();
+  }
 
   void addProduct() {
     // _items.add(value);

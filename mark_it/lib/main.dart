@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mark_it/screens/home_screen.dart';
 import 'package:mark_it/screens/locations_screen.dart';
 import 'package:mark_it/screens/offers_screen.dart';
 import 'package:mark_it/screens/product_detail_screen.dart';
