@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mark_it/screens/cart_screen.dart';
 import '../widgets/offers_location.dart';
 import './home_screen.dart';
 import './categories_screen.dart';
@@ -21,7 +22,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     _pages = [
       {'page': HomeScreen(), 'title': OffersLocation()},
-      {'page': CategoriesScreen(), 'title': Text('Categories')}
+      {'page': CategoriesScreen(), 'title': Text('Categories')},
+      {'page': CartScreen(), 'title': Text('Cart')},
     ];
     super.initState();
   }
