@@ -11,6 +11,7 @@ class SearchBar extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
             width: MediaQuery.of(context).size.width,
             child: TextFormField(
+              autocorrect: true,
               decoration: InputDecoration(labelText: 'Search Product'),
               textInputAction: TextInputAction.done,
             ),

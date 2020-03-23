@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mark_it/screens/locations_screen.dart';
+import '../screens/offers_screen.dart';
 
 class OffersLocation extends StatelessWidget {
   @override
@@ -21,7 +22,7 @@ class OffersLocation extends StatelessWidget {
         ),
         Container(
           child: FlatButton.icon(
-            onPressed: () => print('Bye'),
+            onPressed: () {Navigator.of(context).pushNamed(OffersScreen.routeName);}, //...Navigate to Offers Page,
             label: Text(
               'Offers',
               style: TextStyle(fontSize: 24, color: Colors.black),

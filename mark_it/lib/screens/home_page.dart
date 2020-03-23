@@ -1,20 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:mark_it/widgets/products_grid.dart';
 import '../widgets/offers_location.dart';
-import '../widgets/search_bar.dart';
+import './home_screen.dart';
+import './categories_screen.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Map<String, Object>> _pages;
+  int _selectedPageIndex = 0;
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+    print(_pages[_selectedPageIndex]['page']);
+  }
+
+  void initState() {
+    _pages = [
+      {'page': HomeScreen(), 'title': OffersLocation()},
+      {'page': CategoriesScreen(), 'title': Text('Categories')}
+    ];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: OffersLocation(),
+        title: _pages[_selectedPageIndex]['title'],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        selectedItemColor: Theme.of(context).accentColor,
+        unselectedItemColor: Colors.black,
+        currentIndex: _selectedPageIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            title: Text('Categories'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_basket),
@@ -26,17 +56,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            SearchBar(),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: ProductsGrid(),
-            ),
-          ],
-        ),
-      ),
+      body: _pages[_selectedPageIndex]['page'],
     );
   }
 }
