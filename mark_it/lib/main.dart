@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mark_it/screens/home_screen.dart';
 import 'package:mark_it/screens/locations_screen.dart';
 import 'package:mark_it/screens/offers_screen.dart';
 import 'package:mark_it/screens/product_detail_screen.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
+import './screens/login_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,11 +34,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
           accentColor: Colors.amber,
         ),
-        home: HomePage(),
+        home: LoginScreen(),
         routes: {
           LocationsScreen.routeName: (_) => LocationsScreen(),
           ProductDetailScreen.routeName: (_) => ProductDetailScreen(),
           OffersScreen.routeName: (_) => OffersScreen(),
+          HomePage.routeName: (_) => HomePage(),
         },
       ),
     );
