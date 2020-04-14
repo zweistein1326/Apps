@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
-import '../providers/products.dart';
-import './product_item.dart';
+import '../providers/shops.dart';
+import './shop_item.dart';
 import 'package:provider/provider.dart';
-import '../providers/product.dart';
 
-class ProductsGrid extends StatelessWidget {
-  final List<Product> products;
-
-  ProductsGrid(this.products) {
-    print(products[0].title);
-  }
-
+class ShopsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final shopsData = Provider.of<Shops>(context);
+    final shops = shopsData.shops;
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         childAspectRatio: 3 / 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
       itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
         //create : (_) => products[i]
-        value: products[index],
-        child: ProductItem(
+        value: shops[index],
+        child: ShopItem(
             // products[index].id,
             // products[index].title,
             // products[index].imageURL,
             ),
       ),
-      itemCount: products.length,
+      itemCount: shops.length,
     );
   }
 }

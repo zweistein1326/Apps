@@ -5,11 +5,11 @@ class Products with ChangeNotifier {
   final List<Product> _items = [
     Product(
       id: 'p1',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
-      price: 29.99,
+      title: 'Maggi',
+      description: 'Aapki apni maggi',
+      price: 12.99,
       imageURL:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://images-na.ssl-images-amazon.com/images/I/71OPa99tUPL._SL1461_.jpg',
     ),
     Product(
       id: 'p2',

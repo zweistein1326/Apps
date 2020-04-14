@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/search_bar.dart';
-import '../widgets/products_grid.dart';
+import '../widgets/shops_grid.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -8,10 +8,12 @@ class HomeScreen extends StatelessWidget {
     return Container(
         child: ListView(
       children: <Widget>[
-        SearchBar(),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          child: ProductsGrid(),
+        SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top:10),
+            height: MediaQuery.of(context).size.height * 0.72,
+            child: ShopsGrid(),
+          ),
         ),
       ],
     ));

@@ -8,13 +8,13 @@ import './categories_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart.dart';
 
-class HomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   static const routeName = '/home';
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
   void _selectPage(int index) {

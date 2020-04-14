@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mark_it/screens/home_page.dart';
+import 'package:mark_it/screens/home.dart';
 import '../screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                     child: Text('Skip'),
                     onPressed: () {
                       Navigator.of(context)
-                          .pushReplacementNamed(HomePage.routeName);
+                          .pushReplacementNamed(Home.routeName);
                     },
                   ),
                 ),

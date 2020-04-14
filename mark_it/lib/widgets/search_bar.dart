@@ -3,13 +3,12 @@ import 'package:mark_it/providers/products.dart';
 import 'package:provider/provider.dart';
 
 class SearchBar extends StatefulWidget {
+  final _searchController = TextEditingController();
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  final _searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<Products>(context);
@@ -23,7 +22,7 @@ class _SearchBarState extends State<SearchBar> {
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             alignment: Alignment.center,
             child: TextFormField(
-              controller: _searchController,
+              controller: widget._searchController,
               autocorrect: true,
               decoration: InputDecoration(
                 labelText: 'Search Product',
@@ -31,13 +30,14 @@ class _SearchBarState extends State<SearchBar> {
                 suffix: IconButton(
                   icon: Icon(Icons.cancel),
                   onPressed: () {
-                    _searchController.clear();
+                    widget._searchController.clear();
                     products.checkSubString('');
                   },
                 ),
               ),
               textInputAction: TextInputAction.done,
               onChanged: (value) {
+                print(widget._searchController.text);
                 products.checkSubString(value);
               },
             ),

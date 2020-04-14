@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mark_it/screens/locations_screen.dart';
 import 'package:mark_it/screens/offers_screen.dart';
 import 'package:mark_it/screens/product_detail_screen.dart';
+import 'package:mark_it/screens/shop_detail_screen.dart';
 import 'package:mark_it/screens/user_screen.dart';
-import './screens/home_page.dart';
+import 'package:mark_it/widgets/shops_grid.dart';
+import './screens/home.dart';
 import 'package:provider/provider.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
 import './screens/login_screen.dart';
+import './providers/shops.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +29,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Orders(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Shops(),
         )
       ],
       child: MaterialApp(
@@ -39,8 +45,9 @@ class MyApp extends StatelessWidget {
           LocationsScreen.routeName: (_) => LocationsScreen(),
           ProductDetailScreen.routeName: (_) => ProductDetailScreen(),
           OffersScreen.routeName: (_) => OffersScreen(),
-          HomePage.routeName: (_) => HomePage(),
+          Home.routeName: (_) => Home(),
           UserScreen.routeName: (_) => UserScreen(),
+          ShopDetailScreen.routeName: (_) => ShopDetailScreen(),
         },
       ),
     );
