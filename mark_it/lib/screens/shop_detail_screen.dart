@@ -15,7 +15,6 @@ class ShopDetailScreen extends StatelessWidget {
     final shopId = ModalRoute.of(context).settings.arguments as String;
     final loadedShop = Provider.of<Shops>(
       context,
-      listen: false,
     ).findById(shopId);
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +27,7 @@ class ShopDetailScreen extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.only(top:10),
             height: MediaQuery.of(context).size.height * 0.72,
-            child: ProductsGrid(loadedShop.products),
+            child: ProductsGrid(loadedShop.title),
           ),
         ),
           

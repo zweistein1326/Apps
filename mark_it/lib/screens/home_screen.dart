@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/search_bar.dart';
 import '../widgets/shops_grid.dart';
 
 class HomeScreen extends StatelessWidget {

@@ -31,14 +31,14 @@ class _SearchBarState extends State<SearchBar> {
                   icon: Icon(Icons.cancel),
                   onPressed: () {
                     widget._searchController.clear();
-                    products.checkSubString('');
+                    // products.checkSubString('');
                   },
                 ),
               ),
               textInputAction: TextInputAction.done,
               onChanged: (value) {
                 print(widget._searchController.text);
-                products.checkSubString(value);
+                // products.checkSubString(value);
               },
             ),
           ),
