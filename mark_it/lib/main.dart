@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mark_it/screens/category_items_screen.dart';
-import 'package:mark_it/screens/locations_screen.dart';
-import 'package:mark_it/screens/offers_screen.dart';
-import 'package:mark_it/screens/product_detail_screen.dart';
-import 'package:mark_it/screens/shop_detail_screen.dart';
-import 'package:mark_it/screens/user_screen.dart';
-import 'package:mark_it/widgets/shops_grid.dart';
-import './screens/home.dart';
+import 'package:mark_it/screens/home_screen.dart';
+import 'package:mark_it/screens/product_details_screen.dart';
+import 'package:mark_it/screens/shop_details_screen.dart';
 import 'package:provider/provider.dart';
 import './providers/products.dart';
-import './providers/cart.dart';
-import './providers/orders.dart';
 import './screens/login_screen.dart';
 import './providers/shops.dart';
-
+import './providers/cart.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -26,31 +20,21 @@ class MyApp extends StatelessWidget {
           value: Products(),
         ),
         ChangeNotifierProvider.value(
-          // create:(_)=>Products()
-          value: Cart(),
-        ),
-        ChangeNotifierProvider.value(
-          value: Orders(),
-        ),
-        ChangeNotifierProvider.value(
           value: Shops(),
-        )
+        ),
+        ChangeNotifierProvider.value(value: Cart())
       ],
       child: MaterialApp(
-        title: 'Name',
         theme: ThemeData(
           primarySwatch: Colors.red,
           accentColor: Colors.amber,
+          canvasColor: Color.fromRGBO(255, 254, 229, 1),
         ),
         home: LoginScreen(),
         routes: {
-          LocationsScreen.routeName: (_) => LocationsScreen(),
+          HomeScreen.routeName: (_) => HomeScreen(),
+          ShopDetailsScreen.routeName: (_) => ShopDetailsScreen(),
           ProductDetailScreen.routeName: (_) => ProductDetailScreen(),
-          OffersScreen.routeName: (_) => OffersScreen(),
-          Home.routeName: (_) => Home(),
-          UserScreen.routeName: (_) => UserScreen(),
-          ShopDetailScreen.routeName: (_) => ShopDetailScreen(),
-          CategoryItemsScreen.routeName : (_)=> CategoryItemsScreen(),
         },
       ),
     );

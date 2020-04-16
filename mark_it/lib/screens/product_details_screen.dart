@@ -3,18 +3,11 @@ import 'package:provider/provider.dart';
 import '../providers/products.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  // final String title;
-  // final double price;
-  // final String imageUrl;
-  // ProductDetailScreen(this.title,this.price,this.imageUrl);
-  static const routeName = '/product-detail';
+  static const routeName = 'product-detail';
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context).settings.arguments as String;
-    final loadedProduct = Provider.of<Products>(
-      context,
-      listen: false,
-    ).findById(productId);
+    final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
       appBar: AppBar(
         title: Text(loadedProduct.title),
@@ -23,32 +16,36 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: 300,
-              width: double.infinity,
               child: Image.network(
-                loadedProduct.imageURL,
-                fit: BoxFit.cover,
+                loadedProduct.imageUrl,
+                fit: BoxFit.contain,
               ),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              '${loadedProduct.price}',
+              '\$${loadedProduct.price}',
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.black,
                 fontSize: 20,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 loadedProduct.description,
                 textAlign: TextAlign.center,
                 softWrap: true,
               ),
+            ),
+            RaisedButton(
+              child: Container(
+                child: Text('Add to Cart'),
+              ),
+              onPressed: () {/*Add to Cart Functionality*/},
             )
           ],
         ),

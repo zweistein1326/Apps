@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../providers/shops.dart';
 import './shop_item.dart';
-import 'package:provider/provider.dart';
 
 class ShopsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shopsData = Provider.of<Shops>(context);
     final shops = shopsData.shops;
+    print(shops);
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

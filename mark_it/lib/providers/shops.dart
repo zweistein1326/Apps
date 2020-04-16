@@ -1,21 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:mark_it/providers/product.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import './shop.dart';
-import './products.dart';
 
 class Shops with ChangeNotifier {
-  static Products products = new Products();
   final List<Shop> _shops = [
     Shop(
-        id: 'p1',
-        title: 'ELT',
-        category: 'Grocery',
-        imageUrl:
-            'https://i.ytimg.com/vi/JC0VOvxJLi0/hqdefault.jpg',
-        locations: ['Eldeco', 'SilverCity'],
-        products: products.items),
+      shopName: 'ELT',
+      id: 's1',
+      imageUrl: 'https://i.ytimg.com/vi/JC0VOvxJLi0/hqdefault.jpg',
+    ),
+    
   ];
+
   List<Shop> get shops {
     return [..._shops];
   }
