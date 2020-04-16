@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "964359192530",
+    "firebase_url": "https://markit-5c2de.firebaseio.com",
+    "project_id": "markit-5c2de",
+    "storage_bucket": "markit-5c2de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964359192530:android:34a3766d6515242f3dd20b",
+        "android_client_info": {
+          "package_name": "com.example.mark_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964359192530-rm1q7kj7g1pbt3db3vebqrag3c68ksj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mark_it",
+            "certificate_hash": "83d56ba698335c3e5eddc558ec8d8863ee44f3ea"
+          }
+        },
+        {
+          "client_id": "964359192530-nj6lebq7v65br7lr26d997t959h0i498.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPDO6I5u4MJ-ddffUG3HNhRPmpkx5vGuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964359192530-nj6lebq7v65br7lr26d997t959h0i498.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
