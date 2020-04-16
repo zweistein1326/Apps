@@ -5,7 +5,7 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Hello'),
+      child: Text('Hello User! Welcome to Markit, the onestop app to groceries stores near you'),
     );
   }
 }

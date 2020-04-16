@@ -10,7 +10,7 @@ class OffersScreen extends StatelessWidget {
         title: Text('Offers'),
       ),
       body:
-          Center(child: Text('Helo'),),
+          Center(child: Text('No Offers Available at the Moment'),),
     );
   }
 }
