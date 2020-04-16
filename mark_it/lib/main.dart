@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
           accentColor: Colors.amber,
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
         ),
         home: LoginScreen(),
         routes: {
