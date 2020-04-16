@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     FirebaseUser userDetails =
-        (await _firebaseAuth.signInWithCredential(credential)) as FirebaseUser;
+        (await _firebaseAuth.signInWithCredential(credential)).user;
     ProviderDetails providerInfo = new ProviderDetails(userDetails.providerId);
 
     List<ProviderDetails> providerData = new List<ProviderDetails>();
