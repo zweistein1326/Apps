@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
           OrdersScreen.routeName: (ctx) => OrdersScreen(),
           UserProductsScreen.routeName: (_) => UserProductsScreen(),
           EditProductScreen.routeName: (_) => EditProductScreen(),
-          
         },
       ),
     );
