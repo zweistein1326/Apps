@@ -95,6 +95,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
           builder: (ctx) => AlertDialog(
             title: Text('An error occured'),
             content: Text('Something went wrong'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
           ),
         );
       }).then((_) {
