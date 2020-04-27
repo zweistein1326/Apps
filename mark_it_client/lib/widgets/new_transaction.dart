@@ -15,6 +15,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final _descController = TextEditingController();
 
   final _amountController = TextEditingController();
+  final _phoneController = TextEditingController();
 
   DateTime _selectedDate;
   void _submitData() {
@@ -24,11 +25,12 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredTitle = _titleController.text;
     final enteredDesc = _descController.text;
     final enteredAmount = double.parse(_amountController.text);
-    if (enteredDesc.isEmpty ||enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
+    final enteredPhone = double.parse(_phoneController.text);
+    if (enteredDesc.isEmpty ||enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null || enteredPhone <= 0) {
       return;
     }
 
-    widget.addTxn(enteredTitle, enteredAmount,enteredDesc ,_selectedDate);
+    widget.addTxn(enteredTitle, enteredAmount,enteredPhone,enteredDesc ,_selectedDate,);
     Navigator.of(context).pop();
   }
 
@@ -53,8 +55,8 @@ class _NewTransactionState extends State<NewTransaction> {
     return Card(
       elevation: 5,
       child: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -75,14 +77,22 @@ class _NewTransactionState extends State<NewTransaction> {
             ),
             TextField(
               decoration: InputDecoration(
+                labelText: 'Phone Number',
+              ),
+              controller: _phoneController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => _submitData(),
+            ),
+            TextField(
+              decoration: InputDecoration(
                 labelText: 'Description',
               ),
               controller: _descController,
-              maxLines: 3,
+              maxLines: 2,
               onSubmitted: (_) => _submitData(),
             ),
             Container(
-              height: 70,
+              height: 50,
               child: Row(
                 children: <Widget>[
                   Expanded(

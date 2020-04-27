@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: 'New Shoes',
       amount: 2499.00,
       date: DateTime.now(),
+      phone: 9871712121,
       description: 'List of items to be entered'
     ),
     // Transaction(
@@ -69,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount, String description,DateTime txDate) {
+  void _addNewTransaction(String txTitle, double txAmount, double phone,String description,DateTime txDate) {
     final newTxn = Transaction(
-        title: txTitle, amount: txAmount, id: txDate.toString(),description: description, date: txDate);
+        title: txTitle, amount: txAmount, id: txDate.toString(),description: description, date: txDate,phone: phone);
     setState(() {
       _userTransactions.add(newTxn);
     });

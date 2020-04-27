@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mark_it_client/models/transaction.dart';
@@ -21,7 +20,7 @@ class TransactionList extends StatelessWidget {
                   height: 30,
                 ),
                 Container(
-                    height: constraints.maxHeight*0.6,
+                    height: constraints.maxHeight * 0.6,
                     child: Image.asset('assets/images/waiting.png',
                         fit: BoxFit.cover)),
               ],
@@ -44,13 +43,38 @@ class TransactionList extends StatelessWidget {
                     transactions[index].title,
                     style: Theme.of(context).textTheme.title,
                   ),
-                  
                   subtitle: Text(transactions[index].description),
                   isThreeLine: true,
                   trailing: IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () => _deleteTxn(transactions[index].id),
                       color: Theme.of(context).errorColor),
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (_) {
+                          return GestureDetector(
+                            onTap: () {},
+                            child: Card(
+                                elevation: 5,
+                                child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(transactions[index].title),
+                                          Text('₹${transactions[index].amount}'),
+                                          Text(transactions[index].description),
+                                          Text(DateFormat.yMMMd().format(transactions[index].date)),
+                                          Text('${transactions[index].phone}')
+
+                                        ],),),),
+                            behavior: HitTestBehavior.opaque,
+                          );
+                        });
+                  },
                 ),
               );
             },
