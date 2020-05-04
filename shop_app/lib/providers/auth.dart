@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/models/http_exception.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -22,7 +23,10 @@ class Auth with ChangeNotifier {
           },
         ),
       );
-      print(response.body);
+      final responseData = json.decode(response.body);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
     } catch (error) {
       throw error;
     }
