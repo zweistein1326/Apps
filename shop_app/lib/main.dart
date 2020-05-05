@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/providers/auth.dart';
-import 'package:flutter_complete_guide/screens/auth_screen.dart';
+import './providers/auth.dart';
+import './screens/auth_screen.dart';
 import 'package:provider/provider.dart';
 
 import './screens/cart_screen.dart';
@@ -35,14 +35,27 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: Consumer<Auth>(
-          builder: (ctx, authData, _) => MaterialApp(
+          builder: (ctx, auth, _) => MaterialApp(
               title: 'MyShop',
               theme: ThemeData(
                 primarySwatch: Colors.red,
                 accentColor: Colors.amber,
                 fontFamily: 'Lato',
               ),
-              home: authData.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+              home: auth.isAuth
+                  ? ProductsOverviewScreen()
+                  : FutureBuilder(
+                      future: auth.tryAutoLogin(),
+                      builder: (ctx, authResultSnapshot) =>
+                          authResultSnapshot.connectionState ==
+                                  ConnectionState.waiting
+                              ? Scaffold(
+                                  body: Center(
+                                    child: Text('User is loading....'),
+                                  ),
+                                )
+                              : AuthScreen(),
+                    ),
               routes: {
                 ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
