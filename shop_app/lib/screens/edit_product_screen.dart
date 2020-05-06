@@ -32,6 +32,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   };
   var _isInit = true;
   var _isLoading = false;
+
   @override
   void initState() {
     _imageUrlFocusNode.addListener(_updateImageUrl);
@@ -102,30 +103,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
         await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('An error ocurred!'),
-            content: Text('Something went wrong'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Okay'),
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-              )
-            ],
-          ),
+                title: Text('An error occurred!'),
+                content: Text('Something went wrong.'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                  )
+                ],
+              ),
         );
-        // } finally {
-        //   setState(() {
-        //     _isLoading = false;
-        //   });
-        //   Navigator.of(context).pop();
-        // }
       }
+      // finally {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   Navigator.of(context).pop();
+      // }
     }
     setState(() {
       _isLoading = false;
     });
     Navigator.of(context).pop();
+    // Navigator.of(context).pop();
   }
 
   @override
@@ -141,7 +143,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(

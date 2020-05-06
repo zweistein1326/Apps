@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import './product.dart';
 import '../models/http_exception.dart';
+import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -62,6 +62,16 @@ class Products with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
+  // void showFavoritesOnly() {
+  //   _showFavoritesOnly = true;
+  //   notifyListeners();
+  // }
+
+  // void showAll() {
+  //   _showFavoritesOnly = false;
+  //   notifyListeners();
+  // }
+
   Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
     final filterString =
         filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
@@ -78,34 +88,23 @@ class Products with ChangeNotifier {
       final favoriteResponse = await http.get(url);
       final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
-      extractedData.forEach((prodId, value) {
-        loadedProducts.add(
-          Product(
-            id: prodId,
-            title: value['title'],
-            description: value['description'],
-            price: value['price'],
-            imageUrl: value['imageUrl'],
-            isFavorite:
-                favoriteData == null ? false : favoriteData[prodId] ?? false,
-          ),
-        );
+      extractedData.forEach((prodId, prodData) {
+        loadedProducts.add(Product(
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          isFavorite:
+              favoriteData == null ? false : favoriteData[prodId] ?? false,
+          imageUrl: prodData['imageUrl'],
+        ));
       });
       _items = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw error;
+      throw (error);
     }
   }
-  // void showFavoritesOnly() {
-  //   _showFavoritesOnly = true;
-  //   notifyListeners();
-  // }
-
-  // void showAll() {
-  //   _showFavoritesOnly = false;
-  //   notifyListeners();
-  // }
 
   Future<void> addProduct(Product product) async {
     final url =
@@ -118,7 +117,7 @@ class Products with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
-          "creatorId": userId,
+          'creatorId': userId,
         }),
       );
       final newProduct = Product(
@@ -132,10 +131,9 @@ class Products with ChangeNotifier {
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners();
     } catch (error) {
+      print(error);
       throw error;
     }
-
-    // throw error;
   }
 
   Future<void> updateProduct(String id, Product newProduct) async {
@@ -143,15 +141,13 @@ class Products with ChangeNotifier {
     if (prodIndex >= 0) {
       final url =
           'https://shop-app-e57d2.firebaseio.com/products/$id.json?auth=$authToken';
-      await http.patch(
-        url,
-        body: json.encode({
-          'title': newProduct.title,
-          'description': newProduct.description,
-          'imageUrl': newProduct.imageUrl,
-          'price': newProduct.price
-        }),
-      );
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price
+          }));
       _items[prodIndex] = newProduct;
       notifyListeners();
     } else {
@@ -159,7 +155,6 @@ class Products with ChangeNotifier {
     }
   }
 
-//Optimistic Updating
   Future<void> deleteProduct(String id) async {
     final url =
         'https://shop-app-e57d2.firebaseio.com/products/$id.json?auth=$authToken';
@@ -171,7 +166,7 @@ class Products with ChangeNotifier {
     if (response.statusCode >= 400) {
       _items.insert(existingProductIndex, existingProduct);
       notifyListeners();
-      throw HttpException('Could not delete product');
+      throw HttpException('Could not delete product.');
     }
     existingProduct = null;
   }

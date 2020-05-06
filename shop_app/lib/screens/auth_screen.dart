@@ -1,8 +1,9 @@
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth.dart';
-import 'package:flutter/material.dart';
 import '../models/http_exception.dart';
 
 enum AuthMode { Signup, Login }
@@ -23,13 +24,12 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.blue[300],
-                  Colors.blue[300],
-                  Colors.blue[300],
+                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
                 ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.2, 0.8, 1],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [0, 1],
               ),
             ),
           ),
@@ -106,22 +106,23 @@ class _AuthCardState extends State<AuthCard> {
 
   void _showErrorDialog(String message) {
     showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: Text('An error occured'),
-              content: Text(message),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            ));
+      context: context,
+      builder: (ctx) => AlertDialog(
+            title: Text('An Error Occurred!'),
+            content: Text(message),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Okay'),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          ),
+    );
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
       return;
@@ -132,36 +133,38 @@ class _AuthCardState extends State<AuthCard> {
     });
     try {
       if (_authMode == AuthMode.Login) {
+        // Log user in
         await Provider.of<Auth>(context, listen: false).login(
           _authData['email'],
           _authData['password'],
         );
-        // Log user in
       } else {
         // Sign user up
-        await Provider.of<Auth>(context, listen: false).signUp(
+        await Provider.of<Auth>(context, listen: false).signup(
           _authData['email'],
           _authData['password'],
         );
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';
-      if (error.message.contains('EMAIL_EXISTS')) {
-        errorMessage = 'This email is already in use';
-      } else if (error.message.contains('INVALID_EMAIL')) {
-        errorMessage = 'This is not a valid email';
-      } else if (error.message.contains('WEAK_PASSWORD')) {
-        errorMessage = 'This password is too weak';
-      } else if (error.message.contains('INVALID_PASSWORD')) {
-        errorMessage = 'Invalid Password';
-      } else if (error.message.contains('EMAIL_NOT_FOUND')) {
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
         errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
-      const errorMessage = 'Could not authenticate you. Please try again later';
+      const errorMessage =
+          'Could not authenticate you. Please try again later.';
       _showErrorDialog(errorMessage);
     }
+
     setState(() {
       _isLoading = false;
     });

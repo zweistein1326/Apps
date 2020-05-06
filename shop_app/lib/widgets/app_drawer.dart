@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth.dart';
+
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
+import '../providers/auth.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -49,20 +50,20 @@ class AppDrawer extends StatelessWidget {
                   context: (context),
                   child: AlertDialog(
                     title: Text('Logout'),
-                    content: Text('Are you sure?'),
+                    content: Text('Are you sure'),
                     actions: <Widget>[
+                      FlatButton(
+                        child: Text('No'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
                       FlatButton(
                         child: Text('Yes'),
                         onPressed: () {
                           Navigator.of(context).pop();
                           Navigator.of(context).pop();
-                          Provider.of<Auth>(context).logout();
-                        },
-                      ),
-                      FlatButton(
-                        child: Text('No'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
+                          Provider.of<Auth>(context, listen: false).logout();
                         },
                       )
                     ],
