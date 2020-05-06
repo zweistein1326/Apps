@@ -126,6 +126,11 @@ class _AuthCardState extends State<AuthCard>
     _heightAnimation.addListener(() => setState(() {}));
   }
 
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -197,6 +202,7 @@ class _AuthCardState extends State<AuthCard>
       setState(() {
         _authMode = AuthMode.Signup;
       });
+      _controller.forward();
     } else {
       setState(() {
         _authMode = AuthMode.Login;
