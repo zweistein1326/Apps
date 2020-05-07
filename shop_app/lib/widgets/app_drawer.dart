@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../screens/auth_screen.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../providers/auth.dart';
@@ -62,7 +62,8 @@ class AppDrawer extends StatelessWidget {
                         child: Text('Yes'),
                         onPressed: () {
                           Navigator.of(context).pop();
-                          Navigator.of(context).pop();
+
+                          Navigator.of(context).pushReplacementNamed('/');
                           Provider.of<Auth>(context, listen: false).logout();
                         },
                       )
