@@ -75,7 +75,7 @@ class Auth with ChangeNotifier {
       String email, String password, String urlSegment) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyDnFPDCCQj47D22ycTetURPwTo3Rwrmabc';
-    try {
+    try 
       final response = await http.post(
         url,
         body: json.encode(
