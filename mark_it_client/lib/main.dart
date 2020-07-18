@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mark_it_client/widgets/new_transaction.dart';
 import 'package:mark_it_client/widgets/transaction_list.dart';
@@ -17,11 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MarkIt-Client',
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          accentColor: Colors.orangeAccent,
+          primarySwatch: Colors.orange,
+          accentColor: Colors.black,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
+                headline6: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
               ),
           appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+                  headline6: TextStyle(
                       fontFamily: 'OpenSans',
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
@@ -47,13 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   final List<Transaction> _userTransactions = [
     Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 2499.00,
-      date: DateTime.now(),
-      phone: 9871712121,
-      description: 'List of items to be entered'
-    ),
+        id: 't1',
+        title: 'New Shoes',
+        amount: 2499.00,
+        date: DateTime.now(),
+        phone: 9871712121,
+        description: 'List of items to be entered'),
     // Transaction(
     //   id: 't2',
     //   title: 'Groceries',
@@ -70,9 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount, double phone,String description,DateTime txDate) {
+  void _addNewTransaction(String txTitle, double txAmount, double phone,
+      String description, DateTime txDate) {
     final newTxn = Transaction(
-        title: txTitle, amount: txAmount, id: txDate.toString(),description: description, date: txDate,phone: phone);
+        title: txTitle,
+        amount: txAmount,
+        id: txDate.toString(),
+        description: description,
+        date: txDate,
+        phone: phone);
     setState(() {
       _userTransactions.add(newTxn);
     });
@@ -99,7 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget build(BuildContext context) {
-    
     final appBar = AppBar(
       title: Text('MarkIt-Client'),
       actions: <Widget>[
@@ -111,8 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final txtListWidget = Container(
         height: (MediaQuery.of(context).size.height -
-                appBar.preferredSize.height -
-                MediaQuery.of(context).padding.top),
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top),
         child: TransactionList(_userTransactions, _deleteTransaction));
     return Scaffold(
       appBar: appBar,
@@ -120,9 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-             txtListWidget
-          ],
+          children: <Widget>[txtListWidget],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
