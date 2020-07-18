@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          title: 'Rent-App',
+          title: 'Markit Client-App',
           theme: ThemeData(
             primarySwatch: Colors.orange,
             accentColor: Colors.black,

@@ -29,9 +29,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   void initState() {
     _pages = [
-      {'page': SearchBar(), 'title': 'Shop'},
-      {'page': CartBlock(), 'title': 'Cart'},
-      {'page': AccountBlock(), 'title': 'Account'}
+      {'page': SearchBar(), 'title': 'Products'},
+      {'page': CartBlock(), 'title': 'Pending'},
+      {'page': AccountBlock(), 'title': 'Confirmed'}
     ];
     super.initState();
   }
@@ -55,6 +55,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     _isInit = false;
     super.didChangeDependencies();
   }
+  void addNewProduct(BuildContext ctx){
+    // showBottomSheet(context: ctx, builder: (_){
+    //   re
+    // })
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,15 +72,15 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_basket),
-            title: Text('Shop'),
+            title: Text('Products'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
+            title: Text('Pending Orders'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            title: Text('Account'),
+            title: Text('Confirmed Orders'),
           ),
         ],
       ),
@@ -107,6 +112,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               child: CircularProgressIndicator(),
             )
           : _pages[_selectedPageIndex]['page'],
-    );
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          print('On PRessed');
+        },),
+      );
   }
 }
